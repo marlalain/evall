@@ -37,6 +37,24 @@ function evall(_value: TemplateStringsArray) {
 	const slices = evals[0].split(' ');
 	const [fun, ...args] = slices;
 
+	const vars = args
+		.filter(arg => arg[0] != "'" && arg[args.length] != "'" && !fn["number?"](arg));
+
+	if (vars.length !== 0) {
+		const [, ...argVars] = arguments.callee.caller.toString()
+			.split(/[(,)]/)
+			.map(arg => arg.trim());
+
+		Object
+			.entries(arguments.callee.caller.arguments)
+			.forEach(([i, value]) => {
+				const argName = argVars[i];
+				const index = args.indexOf(argName);
+				args[index] = value as string;
+			})
+	}
+
+
 	return fn[fun].apply(fn[fun], args);
 }
 
@@ -49,8 +67,8 @@ console.log(arrayEquals([
 	evall`* 2 2`,
 	evall`(+ 1 1)`,
 	evall`number? 1`,
-	evall`number? ble`,
-	evall`number? 1ble`,
+	evall`number? 'ble'`,
+	evall`number? '1ble'`,
 ], [
 	2,
 	2,
