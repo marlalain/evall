@@ -1,0 +1,25 @@
+{
+  "name": "evall",
+  "version": "1.0.0",
+  "description": "had do to do it to 'em",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsup ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minsk-dev/evall.git"
+  },
+  "author": "Max Power <alex@alexaa.dev>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/minsk-dev/evall/issues"
+  },
+  "homepage": "https://github.com/minsk-dev/evall#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsup": "^6.3.0",
+    "typescript": "^4.8.4"
+  }
+}
